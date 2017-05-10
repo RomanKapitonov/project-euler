@@ -9,8 +9,12 @@
 fibonacci :: [Int]
 fibonacci = [x | x <- zipWith (+) (1:fibonacci) (0:1:fibonacci)]
 
+fibonacci' :: [Int]
 fibonacci' = do
   x <- zipWith (+) (1:fibonacci') (0:1:fibonacci')
   return x
+
+fibonacci'' :: [Int]
+fibonacci'' = 1 : 1 : [a + b | (a, b) <- zip fibonacci'' (tail fibonacci'')]
 
 sum $ filter even $ takeWhile (<4000000) fibonacci'
